@@ -1,4 +1,3 @@
-// api/routes/novel-routes.js
 import express from "express";
 import {
   COMPLETED_NOVELS,
@@ -11,7 +10,7 @@ import {
   GET_PREV_NEXT_CHAPTER,
   HOT_NOVELS,
   LATEST_NOVELS,
-} from "../controllers/novel-controllers.js"; // Adjusted path
+} from "../controllers/novel-controllers.js";
 
 const novelRouter = express.Router();
 
