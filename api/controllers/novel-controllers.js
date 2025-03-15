@@ -11,7 +11,6 @@ const agents = [
   "Mozilla/5.0 (X11; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0",
 ];
 
-// Initialize node-cache with a default TTL of 1 hour (3600 seconds)
 const cache = new NodeCache({ stdTTL: 3600, checkperiod: 120 });
 
 const encodeId = (url) => {
@@ -23,7 +22,6 @@ const decodeId = (encodedId) => {
   return Buffer.from(paddedId, 'base64').toString('utf8');
 };
 
-// Helper function to fetch data with caching
 const fetchWithCache = async (cacheKey, fetchFn) => {
   const cachedData = cache.get(cacheKey);
   if (cachedData) {
@@ -230,7 +228,6 @@ export const GET_NOVEL_BY_KEYWORDS = async (req, res, next) => {
 };
 
 // GET NOVEL DESCRIPTION
-// GET NOVEL DESCRIPTION
 export const GET_NOVEL_DESC = async (req, res, next) => {
   const novelId = req.params.id;
   if (!novelId) return res.status(400).json({ error: "Novel ID is required" });
@@ -279,7 +276,7 @@ export const GET_NOVEL_DESC = async (req, res, next) => {
         let totalPages = $("#list-chapter")?.find(".last > a").attr("href")?.split("page=")[1] || $("#list-chapter")?.find("ul.pagination-sm > li:nth-of-type(9) > a").text();
 
         novel_description.push({
-          id: encodeId(link), // Use hashed novel ID as primary ID
+          id: encodeId(link), // Use hashed novel ID
           img,
           title,
           rating,
@@ -368,7 +365,6 @@ export const GET_PREV_NEXT_CHAPTER = async (req, res, next) => {
 };
 
 // GET CHAPTER CONTENTS
-// GET CHAPTER CONTENTS
 export const GET_CHAPTER_CONTENTS = async (req, res, next) => {
   const chapterId = req.params.chapter_hash_id;
   if (!chapterId) return res.status(400).json({ error: "Chapter ID is required" });
@@ -404,7 +400,6 @@ export const GET_CHAPTER_CONTENTS = async (req, res, next) => {
         }
       };
 
-      // Scrape content
       $("#chapter-content > *", html).each(function () {
         const name = $(this).get(0).name;
         const className = $(this).get(0).attribs?.class || '';
@@ -417,7 +412,6 @@ export const GET_CHAPTER_CONTENTS = async (req, res, next) => {
         }
       });
 
-      // Scrape navigation
       const prevChap = $("#prev_chap", html);
       chapterContents.navigation.prev = {
         isDisabled: prevChap.attr("disabled") !== undefined,
@@ -451,7 +445,6 @@ export const GET_CHAPTER_CONTENTS = async (req, res, next) => {
 };
 
 
-// ? function that will fetch all latest/hot/completed novels along with their pagination pages count
 export const GET_ALL_HOT_NOVELS = async (req, res, next) => {
   const { page } = req.params;
   const cacheKey = `all_hot_novels_${page}`;
@@ -493,7 +486,7 @@ export const GET_ALL_HOT_NOVELS = async (req, res, next) => {
         if (title && link && author && img && latest_chapter) {
           hot_novels.push({
             title,
-            id: encodeId(link), // Use encoded ID instead of link
+            id: encodeId(link),
             author,
             img,
             latest_chapter_id: encodeId(latest_chapter),
