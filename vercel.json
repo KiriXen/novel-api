@@ -1,0 +1,84 @@
+{
+    "version": 2,
+    "functions": {
+      "api/**/*": {
+        "maxDuration": 60
+      }
+    },
+    "routes": [
+      {
+        "src": "/api/novel/hot",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/latest",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/completed",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/search/(.*)/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/description/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/navigate/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/content/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/hot/all/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/latest/all/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/api/novel/completed/all/(.*)",
+        "dest": "/api/index.js",
+        "headers": {
+          "Cache-Control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/api/index.js"
+      }
+    ]
+  }
